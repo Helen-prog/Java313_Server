@@ -41,6 +41,7 @@ public class ReservationSystem {
                     case 0:
                         exit();
                         input.close();
+                        connection.close();
                         return;
                     default:
                         System.out.println("Неверный выбор. Попробуйте еще раз.");
