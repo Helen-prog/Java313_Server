@@ -23,14 +23,17 @@ public class BookListServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        out.println("<html><head><link rel='stylesheet' href='css/style.css'></head><body><div class='list'>");
         try (Connection connection = DriverManager.getConnection("jdbc:mysql:///book", "root", "123456");
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            out.println("<html><head><link rel='stylesheet' href='css/style.css'></head><body><div class='list'>");
             out.println("<table><tr>");
             out.println("<th>Идентификатор книги</th>");
             out.println("<th>Название книги</th>");
             out.println("<th>Книжное издание</th>");
-            out.println("<th>Цена книги</th></tr>");
+            out.println("<th>Цена книги</th>");
+            out.println("<th>Редактирование</th>");
+            out.println("<th>Удаление</th>");
+            out.println("</tr>");
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
                 out.println("<tr>");
@@ -38,6 +41,8 @@ public class BookListServlet extends HttpServlet {
                 out.println("<td> " + resultSet.getString(2) + "</td>");
                 out.println("<td> " + resultSet.getString(3) + "</td>");
                 out.println("<td> " + resultSet.getFloat(4) + "</td>");
+                out.println("<td><a href='editScreen?id=" + resultSet.getInt(1) + "'>Редактировать</a></td>");
+                out.println("<td><a href='deleteUrl?id=" + resultSet.getInt(1) + "'>Удалить</a></td>");
                 out.println("</tr>");
             }
             out.println("</table>");
