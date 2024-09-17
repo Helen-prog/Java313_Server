@@ -1,3 +1,4 @@
+<%@ page import="com.db.DBConnect, java.sql.Connection" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -7,6 +8,8 @@
 </head>
 <body>
 <jsp:include page="component/navbar.jsp" />
+
+<% Connection conn = DBConnect.getConn(); %>
 
 <div id="carouselExampleIndicators" class="carousel slide">
     <div class="carousel-indicators">
@@ -63,6 +66,33 @@
         </div>
     </div>
 </section>
-
+<section class="team">
+    <div class="wrap">
+        <h2>Прием ведут известные врачи</h2>
+        <div class="team__block">
+            <div class="team__element">
+                <img src="img/doct_1.JPG" alt="">
+                <h3>Плотникова Виктория Викторовна</h3>
+                <p>Терапевт</p>
+            </div>
+            <div class="team__element">
+                <img src="img/doct_2.JPG" alt="">
+                <h3>Крохина Маргарита Александровна</h3>
+                <p>Невролог</p>
+            </div>
+            <div class="team__element">
+                <img src="img/doct_3.JPG" alt="">
+                <h3>Сергеева Виктория Николаевна</h3>
+                <p>Врач УЗД</p>
+            </div>
+            <div class="team__element">
+                <img src="img/doct_4.JPG" alt="">
+                <h3>Мельнийчук Ирина Сергеевна</h3>
+                <p>Кардиолог</p>
+            </div>
+        </div>
+    </div>
+</section>
+<jsp:include page="component/footer.jsp" />
 </body>
 </html>
