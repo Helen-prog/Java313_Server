@@ -77,6 +77,7 @@
 h2{
     text-align: center;
     padding-bottom: 40px;
+    padding-top: 40px;
 }
 
 /*team*/
@@ -145,17 +146,46 @@ footer{
     border: 0;
 }
 
-.menu button:hover, .show{
-    color: #00ddff;
-    background: #005577 !important;
-}
+/*.menu button:hover, .show{*/
+/*    color: #00ddff;*/
+/*    background: #005577 !important;*/
+/*}*/
 
-.dropdown-menu a{
+.menu .dropdown-menu a{
     color: #000;
     background: #FFFFFF;
 }
 
-.dropdown-menu a:hover{
+.menu .dropdown-menu a:hover{
     color: #000;
     background: #00ddff;
+}
+
+.admin{
+    padding: 60px 0;
+}
+
+.admin__block{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.admin__element{
+    flex-basis: 24%;
+    box-shadow: 0 0 6px 2px #005577;
+    padding: 30px;
+}
+
+.admin__element img{
+    width: 100%;
+}
+
+.admin__element h3, .admin__element p{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.admin__element p{
+    font-size: 24px;
 }
