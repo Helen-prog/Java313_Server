@@ -12,49 +12,54 @@
     <div class="wrap">
 
 
-        <button class="btn btn-info btn-doctor" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#staticBackdrop"
-                aria-controls="staticBackdrop">
-            Добавить врача
-        </button>
+<%--        <button class="btn btn-info btn-doctor" type="button" data-bs-toggle="offcanvas"--%>
+<%--                data-bs-target="#staticBackdrop"--%>
+<%--                aria-controls="staticBackdrop">--%>
+<%--            Добавить врача--%>
+<%--        </button>--%>
 
-        <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
+        <div class="offcanvas offcanvas-start show" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
              aria-labelledby="staticBackdropLabel">
             <div class="offcanvas-header">
-                <h3 class="offcanvas-title" id="staticBackdropLabel">Добавить врача</h3>
+                <h3 class="offcanvas-title" id="staticBackdropLabel">Редактировать врача</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div>
+                    <c:if test="${not empty errorMsg}">
+                        <p class="center text-danger fs-3">${errorMsg}</p>
+                        <c:remove var="errorMsg" scope="session"/>
+                    </c:if>
+                    <c:if test="${not empty succMsg}">
+                        <p class="center text-success fs-3">${succMsg}</p>
+                        <c:remove var="succMsg" scope="session"/>
+                    </c:if>
 
+                    <%
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        DoctorDao daoEdit = new DoctorDao(DBConnect.getConn());
+                        Doctor doc = daoEdit.getDoctorsById(id);
+                    %>
 
-                    <form action="../addDoctor" method="post">
+                    <form action="../updateDoctor" method="post">
                         <div class="mb-3">
                             <label for="full">Полное имя</label>
-                            <input type="text" required name="full_name" class="form-control" id="full">
+                            <input type="text" required name="full_name" class="form-control" id="full" value="<%=
+                            doc.getFullName()%>">
                         </div>
                         <div class="mb-3">
                             <label for="dob">Дата рождения</label>
-                            <input type="date" required name="dob" class="form-control" id="dob">
+                            <input type="date" required name="dob" class="form-control" id="dob" value="<%= doc.getDob()%>">
                         </div>
                         <div class="mb-3">
                             <label for="qualit">Квалификация</label>
-                            <input type="text" required name="qualification" class="form-control" id="qualit">
+                            <input type="text" required name="qualification" class="form-control" id="qualit"
+                                   value="<%= doc.getQualification()%>">
                         </div>
                         <div class="mb-3">
                             <label for="special">Специалист</label>
                             <select name="spec" required class="form-control" id="special">
-                                <option value="">-- Выбор специалиста --</option>
-                                <%--                    <%--%>
-                                <%--                        SpecialistDao dao = new SpecialistDao(DBConnect.getConn());--%>
-                                <%--                        List<Specialist> list = dao.getAllSpecialist();--%>
-                                <%--                        for (Specialist s : list) {--%>
-                                <%--                    %>--%>
-                                <%--                    <option><%= s.getSpecialistName() %></option>--%>
-                                <%--                    <%--%>
-                                <%--                        }--%>
-                                <%--                    %>--%>
-
+                                <option><%= doc.getSpecialist()%></option>
                                 <%
                                     SpecialistDao dao = new SpecialistDao(DBConnect.getConn());
                                     List<Specialist> list = dao.getAllSpecialist();
@@ -62,7 +67,6 @@
                                 %>
                                 <option><%= s.getSpecialistName() %>
                                 </option>
-                                <%--                    <option><%= "Ренат" %></option>--%>
                                 <%
                                     }
                                 %>
@@ -70,31 +74,29 @@
                         </div>
                         <div class="mb-3">
                             <label for="email">Email</label>
-                            <input type="email" required name="email" class="form-control" id="email">
+                            <input type="email" required name="email" class="form-control" id="email" value="<%=
+                            doc.getEmail()%>">
                         </div>
                         <div class="mb-3">
                             <label for="tel">Телефон</label>
-                            <input type="text" required name="mobno" class="form-control" id="tel">
+                            <input type="text" required name="mobno" class="form-control" id="tel" value="<%=
+                            doc.getMobNo()%>">
                         </div>
                         <div class="mb-3">
                             <label for="psw">Пароль</label>
-                            <input type="password" required name="password" class="form-control" id="psw">
+                            <input type="password" required name="password" class="form-control" id="psw" value="<%=
+                            doc.getPassword()%>">
                         </div>
 
-                        <button class="btn btn-info">Отправить</button>
+                        <input type="hidden" name="id" value="<%=doc.getId()%>">
+
+                        <button class="btn btn-info">Обновить</button>
                     </form>
                 </div>
             </div>
         </div>
         <br>
-        <c:if test="${not empty errorMsg}">
-            <p class="center text-danger fs-3">${errorMsg}</p>
-            <c:remove var="errorMsg" scope="session"/>
-        </c:if>
-        <c:if test="${not empty succMsg}">
-            <p class="center text-success fs-3">${succMsg}</p>
-            <c:remove var="succMsg" scope="session"/>
-        </c:if>
+
         <h2>Данные врачей</h2>
         <table class="table">
             <tr>
@@ -132,3 +134,4 @@
 </section>
 </body>
 </html>
+
