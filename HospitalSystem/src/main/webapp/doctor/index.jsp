@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
     <title>Title</title>
@@ -6,6 +7,11 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp" />
+
+<c:if test="${empty doctorObj}">
+    <c:redirect url="../doctor_login.jsp"></c:redirect>
+</c:if>
+
 <section class="doctor">
     <div class="wrap">
         <h2>Панель врача</h2>
