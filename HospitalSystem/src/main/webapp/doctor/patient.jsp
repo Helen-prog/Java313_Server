@@ -50,7 +50,17 @@
                 <td><%= app.getDiseases() %></td>
                 <td><%= app.getStatus() %></td>
                 <td>
-                    <a href="comment.jsp?id=<%= app.getId() %>" class="btn btn-sm btn-info">Комментарий</a>
+                    <%
+                        if("В ожидании".equals(app.getStatus())){
+                    %>
+                    <a href="comments.jsp?id=<%= app.getId() %>" class="btn btn-sm btn-info">Комментарий</a>
+                    <%
+                        } else {
+                    %>
+                    <a href="#" class="btn btn-sm btn-info disabled">Комментарий</a>
+                    <%
+                        }
+                    %>
                 </td>
             </tr>
             <%

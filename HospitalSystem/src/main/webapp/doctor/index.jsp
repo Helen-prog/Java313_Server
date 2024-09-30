@@ -1,3 +1,4 @@
+<%@ page import="com.entity.Doctor, com.dao.DoctorDao, com.db.DBConnect" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
@@ -15,14 +16,18 @@
 <section class="doctor">
     <div class="wrap">
         <h2>Панель врача</h2>
+        <%
+            Doctor d = (Doctor) session.getAttribute("doctorObj");
+            DoctorDao dao = new DoctorDao(DBConnect.getConn());
+        %>
         <div class="doctor__block">
             <div class="doctor__element">
                 <h3>Врач</h3>
-                <h4>5</h4>
+                <h4><%= dao.countDoctors() %></h4>
             </div>
             <div class="doctor__element">
                 <h3>Назначение</h3>
-                <h4>12</h4>
+                <h4><%= dao.countAppointmentDoctorId(d.getId()) %></h4>
             </div>
         </div>
     </div>

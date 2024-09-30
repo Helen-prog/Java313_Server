@@ -212,3 +212,10 @@ footer{
 .doctor__element h4{
     color: #005577;
 }
+
+.but{
+    margin: 20px 0;
+    background: #00ddff !important;
+    width: 100%;
+    padding: 10px;
+}

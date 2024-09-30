@@ -165,4 +165,85 @@ public class DoctorDao {
 
         return doctor;
     }
+
+    public int countDoctors() {
+        int i = 0;
+
+        try {
+            String sql = "SELECT * FROM doctor";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                i++;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    public int countAppointment() {
+        int i = 0;
+
+        try {
+            String sql = "SELECT * FROM appointment";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                i++;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    public int countUser() {
+        int i = 0;
+
+        try {
+            String sql = "SELECT * FROM user_dtls";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                i++;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    public int countSpecialist() {
+        int i = 0;
+
+        try {
+            String sql = "SELECT * FROM specialist";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                i++;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    public int countAppointmentDoctorId(int did) {
+        int i = 0;
+
+        try {
+            String sql = "SELECT * FROM appointment WHERE doctor_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, did);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                i++;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return i;
+    }
 }
