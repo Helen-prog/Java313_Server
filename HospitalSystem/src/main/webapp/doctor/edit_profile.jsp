@@ -1,3 +1,4 @@
+<%@ page import="com.dao.SpecialistDao, com.entity.Specialist, java.util.List, com.db.DBConnect" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
@@ -40,73 +41,57 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card point-card">
-                    <div class="card-body">
-                        <form action="../doctorUpdateProfile" method="post">
-                            <div class="mb-3">
-                                <label for="full">Полное имя</label>
-                                <input type="text" required name="full_name" class="form-control" id="full"
-                                       value="${doctorObj.fullName}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="dob">Дата рождения</label>
-                                <input type="date" required name="dob" class="form-control" value="${doctorObj.dob}" id="dob">
-                            </div>
-                            <div class="mb-3">
-                                <label for="qualit">Квалификация</label>
-                                <input type="text" required name="qualification" class="form-control"
-                                       value="${doctorObj.qualification}" id="qualit">
-                            </div>
-                            <div class="mb-3">
-                                <label for="special">Специалист</label>
-                                <select name="spec" required class="form-control" id="special">
-                                    <option value="">-- Выбор специалиста --</option>
-                                    <%--                    <%--%>
-                                    <%--                        SpecialistDao dao = new SpecialistDao(DBConnect.getConn());--%>
-                                    <%--                        List<Specialist> list = dao.getAllSpecialist();--%>
-                                    <%--                        for (Specialist s : list) {--%>
-                                    <%--                    %>--%>
-                                    <%--                    <option><%= s.getSpecialistName() %></option>--%>
-                                    <%--                    <%--%>
-                                    <%--                        }--%>
-                                    <%--                    %>--%>
+        <div class="col-md-8">
+            <div class="card point-card">
+                <div class="card-body">
+                    <form action="../doctorUpdateProfile" method="post">
+                        <div class="mb-3">
+                            <label for="full">Полное имя</label>
+                            <input type="text" required name="full_name" class="form-control" id="full"
+                                   value="${doctorObj.fullName}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dob">Дата рождения</label>
+                            <input type="date" required name="dob" class="form-control" value="${doctorObj.dob}" id="dob">
+                        </div>
+                        <div class="mb-3">
+                            <label for="qualit">Квалификация</label>
+                            <input type="text" required name="qualification" class="form-control"
+                                   value="${doctorObj.qualification}" id="qualit">
+                        </div>
+                        <div class="mb-3">
+                            <label for="special">Специалист</label>
+                            <select name="spec" required class="form-control" id="special">
+                                <option value="">${doctorObj.specialist}</option>
+                                <%
+                                    SpecialistDao dao = new SpecialistDao(DBConnect.getConn());
+                                    List<Specialist> list = dao.getAllSpecialist();
+                                    for (Specialist s : list) {
+                                %>
+                                <option><%= s.getSpecialistName() %></option>
+                                <%
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" required name="email" class="form-control" id="email"
+                                   value="${doctorObj.email}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tel">Телефон</label>
+                            <input type="text" required name="mobno" class="form-control" id="tel"
+                                   value="${doctorObj.mobNo}">
+                        </div>
+                        <input type="hidden" name="id" value="${doctorObj.id}">
 
-<%--                                    <%--%>
-<%--                                        SpecialistDao dao = new SpecialistDao(DBConnect.getConn());--%>
-<%--                                        List<Specialist> list = dao.getAllSpecialist();--%>
-<%--                                        for (Specialist s : list) {--%>
-<%--                                    %>--%>
-<%--                                    <option><%= s.getSpecialistName() %>--%>
-<%--                                    </option>--%>
-                                    <%--                    <option><%= "Ренат" %></option>--%>
-<%--                                    <%--%>
-<%--                                        }--%>
-<%--                                    %>--%>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email">Email</label>
-                                <input type="email" required name="email" class="form-control" id="email">
-                            </div>
-                            <div class="mb-3">
-                                <label for="tel">Телефон</label>
-                                <input type="text" required name="mobno" class="form-control" id="tel">
-                            </div>
-                            <div class="mb-3">
-                                <label for="psw">Пароль</label>
-                                <input type="password" required name="password" class="form-control" id="psw">
-                            </div>
-
-                            <button class="btn btn-info">Отправить</button>
-                        </form>
-                    </div>
+                        <button class="btn button">Обновить</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
 </body>
 </html>
