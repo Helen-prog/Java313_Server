@@ -1,0 +1,16 @@
+table{
+    border: 1px solid gray;
+    border-collapse: collapse;
+    width: 900px;
+    margin: 0 auto;
+}
+td{
+    border: 1px solid gray;
+}
+
+.container{
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid gray;
+    padding: 20px;
+}
