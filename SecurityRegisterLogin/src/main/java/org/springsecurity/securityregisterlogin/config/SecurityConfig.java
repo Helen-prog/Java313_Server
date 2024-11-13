@@ -15,6 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private AuthSuccess authSuccess = new AuthSuccess();
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -38,14 +40,16 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(
                         request -> request
-                                .requestMatchers("/", "/register", "/signin", "/saveUser").permitAll()
+                                .requestMatchers("/", "/register", "/signin", "/saveUser", "/item").permitAll()
                                 .requestMatchers("/user/**").authenticated()
+                                .requestMatchers("/admin/**").authenticated()
                 )
                 .csrf(csrf -> csrf.disable())
                 .formLogin(form -> form
                         .loginPage("/signin")
                         .loginProcessingUrl("/userLogin")
-                        .defaultSuccessUrl("/user/profile")
+                        .defaultSuccessUrl("/")
+                        .successHandler(authSuccess)
                         .permitAll()
                 );
         return http.build();
