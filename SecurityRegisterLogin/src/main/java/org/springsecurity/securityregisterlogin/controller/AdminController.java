@@ -9,7 +9,6 @@ import org.springsecurity.securityregisterlogin.entity.Category;
 import org.springsecurity.securityregisterlogin.entity.User;
 import org.springsecurity.securityregisterlogin.repository.UserRepo;
 import org.springsecurity.securityregisterlogin.service.ICategoryService;
-import org.thymeleaf.util.StringUtils;
 
 import java.security.Principal;
 
