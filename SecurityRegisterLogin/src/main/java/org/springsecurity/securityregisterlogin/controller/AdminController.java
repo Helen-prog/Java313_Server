@@ -74,6 +74,7 @@ public class AdminController {
     @PostMapping("/saveCategory")
     public String saveCategory(@ModelAttribute Category category, HttpSession session) {
         Boolean existCategory = categoryService.existCategory(category.getName());
+        System.out.println("existCategory" + existCategory);
         if (existCategory) {
             session.setAttribute("errorMsg", "Category Name already exist");
         } else {
@@ -141,8 +142,14 @@ public class AdminController {
     }
 
     @GetMapping("/items")
-    public String loadViewPost(Model m) {
-        m.addAttribute("posts", postService.getAllPosts());
+    public String loadViewPost(Model m, @RequestParam(defaultValue = "") String ch) {
+        List<Post> posts = null;
+        if(ch != null && ch.length() > 0) {
+            posts = postService.searchPost(ch);
+        } else {
+            posts = postService.getAllPosts();
+        }
+        m.addAttribute("posts", posts);
         return "admin/items";
     }
 
@@ -157,4 +164,10 @@ public class AdminController {
         return "redirect:/admin/items";
     }
 
+    @GetMapping("/editItem/{id}")
+    public String editItem(@PathVariable int id, Model m) {
+        m.addAttribute("post", postService.getPostById(id));
+        m.addAttribute("categories", categoryService.getAllCategory());
+        return "admin/edit_items";
+    }
 }

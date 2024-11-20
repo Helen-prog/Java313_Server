@@ -8,17 +8,9 @@
 <section>
     <div class="container card-sh">
         <div class="col-md-12 p-5">
-            <img src="/img/post_img/OIP.jpg" alt="" class="image">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem facere quod voluptatum eligendi molestias velit vero quam aperiam quos. Sequi dolor in nam mollitia quidem illum omnis, deserunt deleniti optio.
-                Distinctio eos modi labore nostrum reiciendis possimus iure fugiat blanditiis, quasi, quo vel, voluptates ratione repudiandae. Eius, ab? Quod numquam cupiditate laudantium eaque rem at, laborum nostrum iste voluptates doloribus!
-                Consequatur commodi tempore esse rem, delectus aspernatur enim optio aliquam doloremque sunt voluptas, ratione voluptatem accusantium doloribus voluptates qui libero aliquid provident perspiciatis deleniti aperiam! Dolorum laudantium nam enim! Ut!
-                Cumque laborum natus accusamus earum enim, at eum quae illum exercitationem nemo ipsa vitae iusto adipisci, eos culpa quia omnis explicabo officia neque labore reprehenderit. Quasi repellat aperiam quis incidunt.
-                Mollitia laborum ad maxime doloribus eum fugit, distinctio placeat ipsum necessitatibus nemo veniam sed fuga, amet reiciendis. Quas veritatis dolore tenetur aliquid facilis incidunt assumenda illo laboriosam nam, fuga minima?
-                Optio, expedita in. Blanditiis, tempora. Magnam autem voluptate eaque fuga doloribus possimus nihil corrupti itaque saepe reprehenderit vel commodi, ipsam similique quidem praesentium sint magni officia quibusdam numquam iure. Provident?
-                Obcaecati inventore, quos magnam saepe sed vel, quibusdam earum reiciendis exercitationem quaerat est voluptatibus asperiores perferendis maiores, temporibus laboriosam dignissimos. Culpa velit maxime recusandae rem quae excepturi qui, praesentium accusamus.
-                Quod soluta est accusantium laboriosam aliquam, voluptates obcaecati odio aliquid, nostrum iste tempora, maiores expedita minima quam sunt quisquam suscipit voluptas hic mollitia ea incidunt consectetur vitae quas! Non, hic.
-                Fuga quisquam consequatur culpa ab. Atque quasi aliquam ex doloremque? Esse laborum nostrum obcaecati iste a magnam optio dolores, quo fugit quasi voluptatum eveniet beatae laboriosam suscipit, velit culpa iure?
-                Eaque culpa nesciunt ipsam vitae animi nisi temporibus libero itaque maxime? Ea nobis blanditiis, quas nulla velit vel incidunt mollitia. Error amet molestiae eum ratione voluptatibus totam quisquam magni dignissimos.</p>
+            <h3 th:text="${post.title}" class="text-center mb-5"></h3>
+            <img th:src="@{'/img/post_img/'+${post.image}}" alt="" class="image">
+            <div th:text="${post.content}"></div>
         </div>
     </div>
 </section>

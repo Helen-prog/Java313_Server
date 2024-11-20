@@ -19,7 +19,19 @@
                     <p th:text="${session.errorMsg}" class="text-danger fw-bold text-center mt-4"></p>
                     <th:block th:text="${@userService.removeSessionMessage()}"></th:block>
                 </th:block>
-
+                <hr>
+                <div class="col-md-12 p-4">
+                    <form action="/admin/items" method="get">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" name="ch">
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table">
