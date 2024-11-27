@@ -60,6 +60,8 @@ public class HomeController {
         m.addAttribute("pageSize", pageSize);
         m.addAttribute("totalElements", page.getTotalElements());
         m.addAttribute("totalPages", page.getTotalPages());
+        m.addAttribute("isLast", page.isLast());
+        m.addAttribute("isFirst", page.isFirst());
         return "index";
     }
 

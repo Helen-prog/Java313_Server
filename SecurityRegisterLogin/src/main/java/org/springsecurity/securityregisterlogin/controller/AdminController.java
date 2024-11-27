@@ -170,4 +170,17 @@ public class AdminController {
         m.addAttribute("categories", categoryService.getAllCategory());
         return "admin/edit_items";
     }
+
+    @PostMapping("/updatePost")
+    public String updatePost(@ModelAttribute Post post, HttpSession session, @RequestParam("file") MultipartFile image) throws IOException {
+
+        Post updatePost = postService.updatePost(post, image);
+        if(!ObjectUtils.isEmpty(updatePost)) {
+            session.setAttribute("succMsg", "Post Updated Successfully");
+        } else {
+            session.setAttribute("errorMsg", "Post Updated Failed");
+        }
+
+        return "redirect:/admin/editItem/" + post.getId();
+    }
 }

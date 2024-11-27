@@ -6,9 +6,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springsecurity.securityregisterlogin.entity.Post;
 import org.springsecurity.securityregisterlogin.repository.PostRepository;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Service
@@ -70,5 +76,31 @@ public class PostService implements IPostService {
             pagePosts = postRepository.findByCategory(pageable, category);
         }
         return pagePosts;
+    }
+
+    @Override
+    public Post updatePost(Post post, MultipartFile image) {
+        Post dbPost = getPostById(post.getId());
+        String imageName = image.isEmpty() ? dbPost.getImage() : image.getOriginalFilename();
+
+        dbPost.setTitle(post.getTitle());
+        dbPost.setContent(post.getContent());
+        dbPost.setCategory(post.getCategory());
+        dbPost.setImage(imageName);
+
+        Post updatePost = postRepository.save(dbPost);
+        if (updatePost != null) {
+            if(!image.isEmpty()){
+                try{
+                    String saveFile = new File("src/main/resources/static/img").getAbsolutePath();
+                    Path path = Paths.get(saveFile + File.separator + "post_img" + File.separator + image.getOriginalFilename());
+                    Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            return post;
+        }
+        return null;
     }
 }

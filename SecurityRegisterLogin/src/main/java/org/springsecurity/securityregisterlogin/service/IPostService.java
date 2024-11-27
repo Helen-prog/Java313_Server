@@ -1,6 +1,7 @@
 package org.springsecurity.securityregisterlogin.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
 import org.springsecurity.securityregisterlogin.entity.Post;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface IPostService {
     public List<Post> searchPost(String ch);
 
     public Page<Post> getAllPostPagination(Integer pageNo, Integer pageSize, String category);
+
+    public Post updatePost(Post post, MultipartFile image);
 }
